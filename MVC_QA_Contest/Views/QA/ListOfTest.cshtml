@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "ListOfTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListOfTest</h2>
+
+@using MVC_QA_Contest.Models
+@model List<testTable>
+
+<table>
+    <thead>
+        <th>Test Name</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        @foreach(var test in Model)
+            {
+                <tr>
+                    <td>@test.test_name</td>
+                    <td>@Html.ActionLink("Start Test", "StartTest", "QA", new {id = test.test_id},new { @class = "btn btn-primary"})</td>
+                </tr>
+            }
+    </tbody>
+</table>

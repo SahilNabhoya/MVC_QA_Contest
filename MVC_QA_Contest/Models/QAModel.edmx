@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sahilModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="question" Type="text" Nullable="false" />
+          <Property Name="option_1" Type="text" Nullable="false" />
+          <Property Name="option_2" Type="text" Nullable="false" />
+          <Property Name="option_3" Type="text" Nullable="false" />
+          <Property Name="option_4" Type="text" Nullable="false" />
+          <Property Name="answer" Type="int" Nullable="false" />
+          <Property Name="test_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="skipped" Type="int" />
+          <Property Name="Total" Type="int" />
+          <Property Name="totalQuestion" Type="int" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="question_id" Type="int" Nullable="false" />
+          <Property Name="answer" Type="int" />
+          <Property Name="id" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="testTable">
+          <Key>
+            <PropertyRef Name="test_id" />
+          </Key>
+          <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="test_name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK__Result__test_id__7720AD13">
+          <End Role="testTable" Type="Self.testTable" Multiplicity="1" />
+          <End Role="Result" Type="Self.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__question_i__79FD19BE">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__test_id__7AF13DF7">
+          <End Role="testTable" Type="Self.testTable" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Questions_testTable">
+          <End Role="testTable" Type="Self.testTable" Multiplicity="0..1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sahilModelStoreContainer">
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Result" EntityType="Self.Result" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="testTable" EntityType="Self.testTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Result__test_id__7720AD13" Association="Self.FK__Result__test_id__7720AD13">
+            <End Role="testTable" EntitySet="testTable" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__question_i__79FD19BE" Association="Self.FK__Test__question_i__79FD19BE">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__test_id__7AF13DF7" Association="Self.FK__Test__test_id__7AF13DF7">
+            <End Role="testTable" EntitySet="testTable" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Questions_testTable" Association="Self.FK_Questions_testTable">
+            <End Role="testTable" EntitySet="testTable" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sahilModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="question1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="option_1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="option_2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="option_3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="option_4" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="answer" Type="Int32" Nullable="false" />
+          <Property Name="test_id" Type="Int32" />
+          <NavigationProperty Name="testTable" Relationship="sahilModel.FK_Questions_testTable" FromRole="Question" ToRole="testTable" />
+          <NavigationProperty Name="Tests" Relationship="sahilModel.FK__Test__question_i__79FD19BE" FromRole="Question" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="testTable">
+          <Key>
+            <PropertyRef Name="test_id" />
+          </Key>
+          <Property Name="test_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="test_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Questions" Relationship="sahilModel.FK_Questions_testTable" FromRole="testTable" ToRole="Question" />
+          <NavigationProperty Name="Tests" Relationship="sahilModel.FK__Test__test_id__7AF13DF7" FromRole="testTable" ToRole="Test" />
+          <NavigationProperty Name="Results" Relationship="sahilModel.FK__Result__test_id__7720AD13" FromRole="testTable" ToRole="Result" />
+        </EntityType>
+        <EntityContainer Name="sahilEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="testTables" EntityType="Self.testTable" />
+          <AssociationSet Name="FK_Questions_testTable" Association="sahilModel.FK_Questions_testTable">
+            <End Role="testTable" EntitySet="testTables" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <EntitySet Name="Tests" EntityType="sahilModel.Test" />
+          <AssociationSet Name="FK__Test__question_i__79FD19BE" Association="sahilModel.FK__Test__question_i__79FD19BE">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Test" EntitySet="Tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Test__test_id__7AF13DF7" Association="sahilModel.FK__Test__test_id__7AF13DF7">
+            <End Role="testTable" EntitySet="testTables" />
+            <End Role="Test" EntitySet="Tests" />
+          </AssociationSet>
+          <EntitySet Name="Results" EntityType="sahilModel.Result" />
+          <AssociationSet Name="FK__Result__test_id__7720AD13" Association="sahilModel.FK__Result__test_id__7720AD13">
+            <End Role="testTable" EntitySet="testTables" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          </EntityContainer>
+        <Association Name="FK_Questions_testTable">
+          <End Type="sahilModel.testTable" Role="testTable" Multiplicity="0..1" />
+          <End Type="sahilModel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="test_id" Type="Int32" Nullable="false" />
+          <Property Name="question_id" Type="Int32" Nullable="false" />
+          <Property Name="answer" Type="Int32" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Question" Relationship="sahilModel.FK__Test__question_i__79FD19BE" FromRole="Test" ToRole="Question" />
+          <NavigationProperty Name="testTable" Relationship="sahilModel.FK__Test__test_id__7AF13DF7" FromRole="Test" ToRole="testTable" />
+        </EntityType>
+        <Association Name="FK__Test__question_i__79FD19BE">
+          <End Type="sahilModel.Question" Role="Question" Multiplicity="1" />
+          <End Type="sahilModel.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="question_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Test__test_id__7AF13DF7">
+          <End Type="sahilModel.testTable" Role="testTable" Multiplicity="1" />
+          <End Type="sahilModel.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="test_id" Type="Int32" Nullable="false" />
+          <Property Name="skipped" Type="Int32" />
+          <Property Name="Total" Type="Int32" />
+          <Property Name="totalQuestion" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="testTable" Relationship="sahilModel.FK__Result__test_id__7720AD13" FromRole="Result" ToRole="testTable" />
+        </EntityType>
+        <Association Name="FK__Result__test_id__7720AD13">
+          <End Type="sahilModel.testTable" Role="testTable" Multiplicity="1" />
+          <End Type="sahilModel.Result" Role="Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="testTable">
+              <PropertyRef Name="test_id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="test_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sahilModelStoreContainer" CdmEntityContainer="sahilEntities">
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="sahilModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question1" ColumnName="question" />
+                <ScalarProperty Name="option_1" ColumnName="option_1" />
+                <ScalarProperty Name="option_2" ColumnName="option_2" />
+                <ScalarProperty Name="option_3" ColumnName="option_3" />
+                <ScalarProperty Name="option_4" ColumnName="option_4" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="testTables">
+            <EntityTypeMapping TypeName="sahilModel.testTable">
+              <MappingFragment StoreEntitySet="testTable">
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+                <ScalarProperty Name="test_name" ColumnName="test_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="sahilModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="question_id" ColumnName="question_id" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="sahilModel.Result">
+              <MappingFragment StoreEntitySet="Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="totalQuestion" ColumnName="totalQuestion" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="skipped" ColumnName="skipped" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "CreateTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using MVC_QA_Contest.Models
+@model testTable
+<h2>CreateTest</h2>
+
+<div class="container">
+    @using (Html.BeginForm("CreateTest", "QA", FormMethod.Post,new
+    {
+        @id="TestForm"
+    }))
+            {
+
+    @Html.LabelFor(t=>t.test_name,"Enter Test Name : ", new {@class="fw-bold"})
+    @Html.TextBoxFor(t=>t.test_name)
+        <button type="submit" class="btn btn-primary" id="testcreated">Create Test</button>
+            }
+
+    <div id="questiontable" style="display:none">
+        @Html.Partial("~/Views/QA/AddQuestion.cshtml");
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("#TestForm").on("submit", function (e) {
+            e.preventDefault();
+         
+            const data = new FormData($(this)[0]);
+            $.ajax({
+                method: "POST",
+                url: "/QA/CreateTest",
+                data: data,
+                processData: false, contentType:false,
+                success: function (data) {
+                    alert(data.message);
+                    $("#questiontable").css("display", "block");
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        })
+    </script>
+    } 
+

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using MVC_QA_Contest.Models
+@model testTable
+<h2>Index</h2>
+
+@Html.ActionLink("List Of Test","ListOfTest","QA", new { @class = "btn btn-primary" })
+
+
+<button type="button" data-bs-toggle="modal" id="addquestion" data-bs-target="#staticBackdrop" class="btn btn-outline-primary ms-2">Create a new Test</button>
+
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-muted" id="staticBackdropLabel">Employee Profile</h5>
+                <button type="button" class="btn-close close"  data-bs-dismiss="modal" data-bs aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="editprofile">
+                    @using (Html.BeginForm("CreateTest", "QA", FormMethod.Post))
+                    {
+                        @Html.LabelFor(t => t.test_name, "Enter Test Name : ", new { @class = "fw-bold" })
+                        @Html.TextBoxFor(t => t.test_name)
+                        @Html.ValidationMessageFor(t => t.test_name, "", new {@class="text-danger"})
+                        <button type="submit" class="btn btn-primary" id="testcreated">Create Test</button>
+                    }
+            </div>
+        </div>
+    </div>
+</div>
+

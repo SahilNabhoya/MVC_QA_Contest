@@ -1,0 +1,25 @@
+﻿@model MVC_QA_Contest.Custom_Model.QuestionList
+<h1>Add Questions</h1>
+
+<button type="button" data-bs-toggle="modal" id="addquestion" data-bs-target="#staticBackdrop" class="nav-link btn btn-outline-secondary ms-2">Add Question</button>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-muted" id="staticBackdropLabel">Employee Profile</h5>
+                <button type="button" class="btn-close close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="editprofile">
+                @using (Html.BeginForm("GetTestQuestions", "QA", FormMethod.Post))
+            {
+
+                   @Html.DropDownListFor(q=>q.SelectedQuestionId,Model.Questions, "Select a Question", new { @class = "form-control" })
+                    <button type="submit" class="btn btn-primary">Add Question</button>
+            }
+            </div>
+        </div>
+    </div>
+</div>
+

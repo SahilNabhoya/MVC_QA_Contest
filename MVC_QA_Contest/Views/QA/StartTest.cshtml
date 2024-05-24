@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "StartTest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MVC_QA_Contest.Models.Question
+
+<h2>Quiz</h2>
+@{
+    var count = 0;
+}
+
+<div id="PartialQuestion">
+    @Html.Partial("~/Views/QA/GetQuestion.cshtml",Model)
+</div>
+
+
+
+<button type="button" class="btn btn-success" id="next">Next</button>
+@*@if (count == 1)
+{
+    <button type="button" class="btn btn-danger" id="previous" disabled>Previous</button>
+}
+else
+{
+    <button type="button" class="btn btn-danger" id="previous">Previous</button>
+}*@
+
+
+
+@section Scripts{
+
+
+
+    <script>
+        count = 0;
+        function getQuestion() {
+            var formElement = document.getElementById("question"); 
+            var formData = new FormData(formElement);
+            formData.append("count", count);
+           debugger
+            $.ajax({
+                type: "POST",
+                url: "/QA/GetQuestion",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $("#PartialQuestion").empty();
+                    $("#PartialQuestion").html(response);
+                    $('input[type="radio"]').prop('checked', false);
+                }
+            })
+        }
+        $("#next").on("click", function () {
+            count++;
+            getQuestion();
+        })
+        //$("#previous").on("click", function () {
+        //    count--;
+        //    getQuestion();
+        //})
+
+    </script>
+
+}

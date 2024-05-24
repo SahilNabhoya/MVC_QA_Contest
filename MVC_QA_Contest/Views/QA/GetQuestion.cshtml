@@ -1,0 +1,29 @@
+﻿@using MVC_QA_Contest.Models
+@model Question
+<div class="container">
+    <div class="fw-bold">
+        @Html.DisplayTextFor(model => model.question1)
+
+    </div>
+    @using (Html.BeginForm("GetAnswer", "QA", FormMethod.Post , new {id="question"}))
+    {
+        @Html.HiddenFor(model => model.id);
+        @Html.HiddenFor(q => q.test_id)
+
+        <div>
+        @Html.RadioButtonFor(q => q.Uans, 1, new {@class="me-2"}) @Html.DisplayTextFor(model => model.option_1)
+            </div>
+            <div>
+        @Html.RadioButtonFor(q => q.Uans, 2, new { @class = "me-2" }) @Html.DisplayTextFor(model => model.option_2)
+
+            </div>
+            <div>
+
+        @Html.RadioButtonFor(q => q.Uans, 3, new { @class = "me-2" }) @Html.DisplayTextFor(model => model.option_3)
+            </div>
+            <div>
+        @Html.RadioButtonFor(q => q.Uans, 4, new { @class = "me-2" }) @Html.DisplayTextFor(model => model.option_4)
+        </div>
+    }
+
+</div>

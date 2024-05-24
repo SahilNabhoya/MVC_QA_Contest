@@ -1,0 +1,69 @@
+﻿
+
+<h2>AddQuestion</h2>
+
+
+
+@using MVC_QA_Contest.Models
+@model Question
+
+
+
+<div class="container">
+    @using (Html.BeginForm("AddQuestion", "QA", FormMethod.Post))
+    {
+        @Html.HiddenFor(q=>q.test_id)
+        <div class="form-group">
+            @Html.LabelFor(q => q.question1, "Question", new { @class = "fw-bold form-label" })
+            @Html.TextAreaFor(q => q.question1, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.question1, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(q => q.option_1, "Option 1", new { @class = "fw-bold form-label" })
+            @Html.TextAreaFor(q => q.option_1, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.option_1, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(q => q.option_2, "Option 2", new { @class = "fw-bold form-label" })
+            @Html.TextAreaFor(q => q.option_2, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.option_2, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(q => q.option_3, "Option 3", new { @class = "fw-bold form-label" })
+            @Html.TextAreaFor(q => q.option_3, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.option_3, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(q => q.option_4, "Option 4", new { @class = "fw-bold form-label" })
+            @Html.TextAreaFor(q => q.option_4, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.option_4, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(q => q.answer, "Answer", new { @class = "fw-bold form-label" })
+            @Html.DropDownListFor(q => q.answer, new List<SelectListItem>
+       {
+           new SelectListItem{Text="Select Option",Value="0"},
+           new SelectListItem{Text="Option 1",Value="1"},
+           new SelectListItem{Text="Option 2",Value="2"},
+           new SelectListItem{Text="Option 3",Value="3"},
+           new SelectListItem{Text="Option 4",Value="4"},
+       }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(q => q.answer, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary  mt-3">Add Question</button>
+        </div>
+    }
+
+
+
+    @Html.ActionLink("Go To Index", "Index", "QA", new {@class="btn btn-outline primary"})
+</div>
+
+
+

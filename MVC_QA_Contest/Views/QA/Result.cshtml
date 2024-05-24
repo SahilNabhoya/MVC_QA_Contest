@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using MVC_QA_Contest.Models
+@model Result
+<h2>Result</h2>
+
+<div class="container">
+    <div>
+        @*<label>Test Name : @Model.testTable.test_name</label>*@
+    </div>
+    <div>
+        <label>Total Question : @Model.totalQuestion</label>
+    </div>
+    <div>
+        <label>Skipped Question : @Model.skipped</label>
+    </div>
+    <div>
+        <label>Attended Question: @(Model.totalQuestion-Model.skipped)</label>
+    </div>
+    <div>
+        <label>Total Marks : @Model.Total</label>
+    </div>
+
+</div>
